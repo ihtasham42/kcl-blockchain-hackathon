@@ -5,9 +5,11 @@ import {
   CardMedia,
   Chip,
   Typography,
+  ToggleButton,
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
+import Upvote from "./UpvoteButton";
 
 const ProjectCard = ({ data }) => {
   return (
@@ -29,11 +31,21 @@ const ProjectCard = ({ data }) => {
           direction="row"
           alignItems="center"
         >
-          <Chip
-            label="84 votes"
+        {/* <ToggleButton
+          value="upvote"
+          selected={selected}
+          onChange={() => {
+            setSelected(!selected);
+          }}
+        >
+          {selected ?  <BsArrowUpCircle/> :  <BsArrowUpCircleFill/>}
+        </ToggleButton> */}
+        <Upvote />
+          {/* <Chip
+            label = "votes"
             color="success"
             sx={{ width: 115, fontSize: 20 }}
-          />
+          /> */}
           <Button variant="contained">Contribute</Button>
         </Stack>
       </CardContent>
