@@ -28,9 +28,9 @@ const ProjectCardContainer = () => {
 
   return (
     <Grid container sx={{ mt: 3 }}>
-      {cardData.map((data) => (
+      {cardData.map((data, i) => (
         <Grid item xs={6}>
-          <ProjectCard data={data} />
+          <ProjectCard data={data} key={i} />
         </Grid>
       ))}
     </Grid>
