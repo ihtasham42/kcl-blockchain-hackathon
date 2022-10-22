@@ -8,6 +8,7 @@ import { Box, CssBaseline, Typography } from "@mui/material";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
+import ProjectDetails from "./pages/ProjectDetails";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="login" element={<LogIn />} />
+        <Route path="projects" element={<ProjectDetails />} />
       </Routes>
     </Box>
   );

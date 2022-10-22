@@ -1,6 +1,7 @@
 import {
   AppBar,
   Button,
+  Chip,
   Stack,
   TextField,
   Toolbar,
@@ -33,13 +34,16 @@ const Navbar = () => {
               Connect Wallet
             </Button>
           ) : lensConnected ? (
-            <Button
-              color="success"
-              variant="contained"
-              endIcon={<PowerSettingsNew />}
-            >
-              Create Project
-            </Button>
+            <Stack direction="row" spacing={4} alignItems="center">
+              <Typography variant="h6">Blockos: 840</Typography>
+              <Button
+                color="success"
+                variant="contained"
+                endIcon={<PowerSettingsNew />}
+              >
+                Create Project
+              </Button>
+            </Stack>
           ) : lensAssociated ? (
             <Button
               color="success"

@@ -34,7 +34,9 @@ const ProjectCard = ({ data }) => {
             color="success"
             sx={{ width: 115, fontSize: 20 }}
           />
-          <Button variant="contained">Contribute</Button>
+          <Button variant="contained" href="/projects">
+            Contribute
+          </Button>
         </Stack>
       </CardContent>
     </Card>
