@@ -8,15 +8,31 @@ const ProjectCardContainer = () => {
       title: "Open Source Project",
       description: "This is an example of an open source project",
     },
+    {
+      title: "Open Source Project",
+      description: "This is an example of an open source project",
+    },
+    {
+      title: "Open Source Project",
+      description: "This is an example of an open source project",
+    },
+    {
+      title: "Open Source Project",
+      description: "This is an example of an open source project",
+    },
+    {
+      title: "Open Source Project",
+      description: "This is an example of an open source project",
+    },
   ];
 
   return (
     <Grid container sx={{ mt: 3 }}>
-      <Grid item xs={6}>
-        {cardData.map((data) => (
+      {cardData.map((data) => (
+        <Grid item xs={6}>
           <ProjectCard data={data} />
-        ))}
-      </Grid>
+        </Grid>
+      ))}
     </Grid>
   );
 };

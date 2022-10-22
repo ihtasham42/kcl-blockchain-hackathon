@@ -14,7 +14,7 @@ const Home = () => {
             Welcome to BlockHub.
           </Typography>
           <Typography variant="h6" color="text.secondary">
-            Curate projects and evaluate your contributions at the same time.
+            Curate projects and evaluate your contributions here at BlockBox.
           </Typography>
         </Box>
         <ProjectCardContainer />
