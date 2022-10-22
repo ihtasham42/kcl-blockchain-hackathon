@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import { Box, CssBaseline, Typography } from "@mui/material";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import LogIn from "./pages/LogIn";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <CssBaseline />
       <Routes>
         <Route index element={<Home />} />
+        <Route path="login" element={<LogIn />} />
       </Routes>
     </Box>
   );
