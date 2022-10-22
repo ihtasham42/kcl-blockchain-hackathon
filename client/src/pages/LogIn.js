@@ -10,6 +10,11 @@ const LogIn = () => {
         xs={6}
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       ></Grid>
+      <Grid
+        item
+        xs={6}
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      ></Grid>
       <Grid item xs={6}></Grid>
     </Grid>
   );
