@@ -1,7 +1,9 @@
 import {
   AppBar,
   Button,
+  Card,
   Chip,
+  Modal,
   Stack,
   TextField,
   Toolbar,
@@ -100,6 +102,9 @@ const Navbar = () => {
     console.log("here");
     console.log(tx.hash);
     const res = await pollUntilIndexed(tx.hash);
+    setLoading(false);
+    setOpen(false);
+    window.location.reload(false);
     console.log(res);
   };
   useEffect(() => {
@@ -207,8 +212,77 @@ const Navbar = () => {
     return profile;
   };
 
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+  };
+
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   return (
     <AppBar position="static">
+      <Modal open={open} sx={style}>
+        <Card sx={{ padding: 5 }}>
+          <Stack spacing={3}>
+            <Typography variant="h4" textAlign={"center"}>
+              Add your Project to BlockHub
+            </Typography>
+            <TextField
+              name="title"
+              fullWidth
+              placeholder="Title"
+              onChange={handleChange}
+            />
+            <TextField
+              name="description"
+              fullWidth
+              placeholder="Description"
+              onChange={handleChange}
+            />
+            <TextField
+              name="github"
+              fullWidth
+              placeholder="GitHub URL"
+              onChange={handleChange}
+            />
+
+            <Stack spacing={2}>
+              <Button
+                fullWidth
+                variant="contained"
+                color="success"
+                disabled={loading}
+                onClick={() => {
+                  postToLens(formData.title, formData.description);
+                  setLoading(true);
+                }}
+              >
+                {!loading ? <span>Submit</span> : <span>Submitting</span>}
+              </Button>
+              <Button
+                fullWidth
+                onClick={() => {
+                  setFormData({});
+                  setOpen(false);
+                }}
+                color="error"
+                variant="contained"
+              >
+                Cancel
+              </Button>
+            </Stack>
+          </Stack>
+        </Card>
+      </Modal>
       <Toolbar sx={{ alignItems: "center", justifyContent: "space-between" }}>
         <Box>
           <Typography variant="h4">BlockHub</Typography>
@@ -232,16 +306,14 @@ const Navbar = () => {
             >
               Create Profile
             </Button>
-          ) : (
-            lensProfileId
-          )}
+          ) : null}
           {lensProfileId !== "" ? (
             <Button
               color="success"
               variant="contained"
-              onClick={() => postToLens("some title 1", "some description 2")}
+              onClick={() => setOpen(true)}
             >
-              Post
+              Add Project
             </Button>
           ) : null}
         </Stack>

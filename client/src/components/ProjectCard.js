@@ -10,18 +10,18 @@ import { Stack } from "@mui/system";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-const ProjectCard = ({ data }) => {
+const ProjectCard = ({ data, i }) => {
   return (
     <Card variant="outlined" sx={{ m: 2 }}>
       <CardMedia
         component="img"
         height={140}
-        image="https://picsum.photos/500/500"
+        image={"https://picsum.photos/500/500?random=" + i}
         sx={{ objectFit: "cover" }}
       />
       <CardContent>
         <Typography variant="h5" gutterBottom>
-          {data.title}
+          {data.content}
         </Typography>
         <Typography>{data.description}</Typography>
         <Stack
