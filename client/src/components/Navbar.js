@@ -5,9 +5,94 @@ import PowerSettingsNew from "@mui/icons-material/PowerSettingsNew";
 import { ethers, Contract } from 'ethers';
 import { generateChallenge, authenticate } from "./utils/LensProtocol/login";
 import { createProfile, getProfile } from "./utils/LensProtocol/profile";
-
-
+import { uploadToIPFS } from "./utils/ipfs";
+import { v4 as uuidv4 } from "uuid";
+import { createPostTypedData, explorePublications } from "./utils/LensProtocol/publication";
+import { signedTypeData, splitSignature } from "./utils/LensProtocol/utils";
+import { getLensHub } from "./utils/LensProtocol/lens-hub";
+import { pollUntilIndexed } from "./utils/LensProtocol/transactions";
+const source = 'blockerino'
 const Navbar = () => {
+  const getPublications = async () => {
+    const request = {
+      sortCriteria: "LATEST",
+      publicationTypes: ["POST"],
+      sources: [source]
+    }
+    const publications = await explorePublications(request)
+    console.log(publications)
+  }
+  const postToLens = async (title, description) => {
+    const metadata_id = uuidv4();
+    const ipfsResult = await uploadToIPFS({
+      version: "2.0.0",
+      metadata_id,
+      locale: "en-us",
+      mainContentFocus: "TEXT_ONLY",
+      description,
+      content: title,
+      external_url: null,
+      image: null,
+      imageMimeType: null,
+      name: title,
+      attributes: [],
+      tags: [],
+      media: [],
+      appId: "blockerino",
+    });
+    console.log(ipfsResult)
+    const payload = {
+      profileId: lensProfileId,
+      contentURI: "https://" + ipfsResult + '.ipfs.dweb.link/' + metadata_id + '.json',
+      collectModule: {
+        freeCollectModule: { followerOnly: true },
+      },
+      referenceModule: {
+        followerOnlyReferenceModule: false,
+      },
+    }
+    console.log('lens profile id', lensProfileId)
+    console.log(payload.contentURI)
+
+    const result = await createPostTypedData(payload)
+    const typedData = result.data.createPostTypedData.typedData;
+    const { ethereum } = window;
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    const signature = await signedTypeData(
+      signer,
+      typedData.domain,
+      typedData.types,
+      typedData.value
+    );
+    console.log("create post: signature", signature);
+
+    const { v, r, s } = splitSignature(signature);
+    console.log("Signature Split");
+    const lensHub = getLensHub(signer);
+
+    const tx = await lensHub.postWithSig({
+      profileId: typedData.value.profileId,
+      contentURI: typedData.value.contentURI,
+      collectModule: typedData.value.collectModule,
+      collectModuleInitData: typedData.value.collectModuleInitData,
+      referenceModule: typedData.value.referenceModule,
+      referenceModuleInitData: typedData.value.referenceModuleInitData,
+      sig: {
+        v,
+        r,
+        s,
+        deadline: typedData.value.deadline,
+      },
+    });
+    console.log('here')
+    console.log(tx.hash);
+    const res = await pollUntilIndexed(tx.hash);
+    console.log(res)
+  }
+  useEffect(() => {
+    getPublications();
+  })
   const [currAcc, setCurrAcc] = useState("");
   const [lensProfileId, setLensProfileId] = useState("")
   const isWalletConnected = async () => {
@@ -129,7 +214,11 @@ const Navbar = () => {
             <Button
               onClick={() => createLensProfile('kcl-easya')}
               color="success"
-              variant="contained">Create Profile</Button> : null}
+              variant="contained">Create Profile</Button> : lensProfileId}
+          {lensProfileId !== "" ? <Button
+            color="success"
+            variant="contained"
+            onClick={() => postToLens('some title 1', 'some description 2')}>Post</Button> : null}
         </Stack>
       </Toolbar>
     </AppBar>
