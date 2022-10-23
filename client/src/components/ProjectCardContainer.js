@@ -48,7 +48,12 @@ const ProjectCardContainer = () => {
       {cardData &&
         cardData.map((data, i) => (
           <Grid item xs={6}>
-            <ProjectCard data={data.metadata} key={i} i={i} />
+            <ProjectCard
+              data={data.metadata}
+              key={i}
+              i={i}
+              handle={data.profile.handle}
+            />
           </Grid>
         ))}
     </Grid>

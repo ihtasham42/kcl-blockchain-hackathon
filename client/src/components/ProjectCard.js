@@ -10,7 +10,7 @@ import { Stack } from "@mui/system";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-const ProjectCard = ({ data, i }) => {
+const ProjectCard = ({ data, i, handle }) => {
   return (
     <Card variant="outlined" sx={{ m: 2 }}>
       <CardMedia
@@ -20,9 +20,13 @@ const ProjectCard = ({ data, i }) => {
         sx={{ objectFit: "cover" }}
       />
       <CardContent>
+        <Typography color="text.secondary" variant="subtitle2">
+          {handle}
+        </Typography>
         <Typography variant="h5" gutterBottom>
           {data.content}
         </Typography>
+
         <Typography>{data.description}</Typography>
         <Stack
           mt={3}
