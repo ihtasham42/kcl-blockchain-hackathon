@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Avatar,
   Button,
   Card,
   CardActionArea,
@@ -10,6 +11,8 @@ import {
   Divider,
   Grid,
   Link,
+  List,
+  ListItem,
   Stack,
   Typography,
 } from "@mui/material";
@@ -18,6 +21,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Link as RouterLink } from "react-router-dom";
 
 const ProjectDetails = () => {
   const data = {
@@ -50,6 +54,13 @@ const ProjectDetails = () => {
         severity: "Minor",
       },
     ],
+    topContributers: [
+      { name: "Tom", contributions: 17 },
+      { name: "Benny", contributions: 14 },
+      { name: "Harry", contributions: 8 },
+      { name: "JohnDoe", contributions: 6 },
+      { name: "JaneDoe", contributions: 6 },
+    ],
   };
 
   const issueSeverityMapping = {
@@ -60,10 +71,9 @@ const ProjectDetails = () => {
 
   return (
     <Box>
-      <Navbar />
       <Container maxWidth="md">
         <Stack sx={{ mt: 5 }}>
-          <Link sx={{ mb: 2 }} href="/">
+          <Link sx={{ mb: 2 }} component={RouterLink} to="/">
             Go Back{" "}
           </Link>
           <Typography variant="h2" gutterBottom>
@@ -119,6 +129,38 @@ const ProjectDetails = () => {
               </Accordion>
             ))}
           </Box>
+          <Typography variant="h5" sx={{ mt: 2, my: 2 }}>
+            Top Contributors
+          </Typography>
+          <Card variant="outlined" sx={{ mb: 4 }}>
+            <List>
+              {data.topContributers.map((contributor, i) => (
+                <Box>
+                  <ListItem>
+                    <Stack
+                      direction="row"
+                      alignItems="center"
+                      justifyContent="space-between"
+                      sx={{ width: "100%" }}
+                    >
+                      <Stack direction="row" alignItems="center" spacing={2}>
+                        <Typography variant="h5">#{i + 1}</Typography>
+                        <Avatar
+                          src={"https://robohash.org/" + contributor.name}
+                        />
+                        <Typography>{contributor.name}</Typography>
+                      </Stack>
+                      <Chip
+                        color="info"
+                        label={contributor.contributions + " contributions"}
+                      />
+                    </Stack>
+                  </ListItem>
+                  {i != data.topContributers.length - 1 && <Divider />}
+                </Box>
+              ))}
+            </List>
+          </Card>
         </Stack>
       </Container>
     </Box>

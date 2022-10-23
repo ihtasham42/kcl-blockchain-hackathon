@@ -14,6 +14,7 @@ function App() {
   return (
     <Box className="App">
       <CssBaseline />
+      <Navbar />
       <Routes>
         <Route index element={<Home />} />
         <Route path="login" element={<LogIn />} />

@@ -7,7 +7,6 @@ import ProjectCardContainer from "../components/ProjectCardContainer";
 const Home = () => {
   return (
     <Box>
-      <Navbar />
       <Container maxWidth="md">
         <Box sx={{ mt: 5, textAlign: "center" }}>
           <Typography variant="h2" gutterBottom>

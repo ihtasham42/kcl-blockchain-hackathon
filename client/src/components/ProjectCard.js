@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 const ProjectCard = ({ data }) => {
   return (
@@ -34,7 +35,7 @@ const ProjectCard = ({ data }) => {
             color="success"
             sx={{ width: 115, fontSize: 20 }}
           />
-          <Button variant="contained" href="/projects">
+          <Button variant="contained" component={RouterLink} to="/projects">
             Contribute
           </Button>
         </Stack>
