@@ -1,0 +1,24 @@
+pragma solidity ^0.8.10;
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.0.0/contracts/token/ERC20/ERC20.sol";
+contract Block is ERC20 {
+    uint256 public unitsOneEthCanBuy  = 10;
+    address public tokenOwner;         
+    constructor(string memory name, string memory symbol) 
+    ERC20(name, symbol) {
+        tokenOwner = msg.sender;            
+        uint256 n = 1000;
+        _mint(msg.sender, n * 10**uint(decimals()));        
+    }
+    
+    receive() external payable {        
+    
+        uint256 amount = msg.value * unitsOneEthCanBuy;
+        require(balanceOf(tokenOwner) >= amount, 
+            "Not enough tokens");
+        _transfer(tokenOwner, msg.sender, amount);
+        emit Transfer(tokenOwner, msg.sender, amount);
+        
+    
+        payable(tokenOwner).transfer(msg.value);
+    }
+}
