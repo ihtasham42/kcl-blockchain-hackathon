@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   Chip,
+  IconButton,
   Modal,
   Stack,
   TextField,
@@ -18,6 +19,7 @@ import { createProfile, getProfile } from "./utils/LensProtocol/profile";
 import { uploadToIPFS } from "./utils/ipfs";
 import { v4 as uuidv4 } from "uuid";
 import { Link as RouterLink } from "react-router-dom";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {
   createPostTypedData,
   explorePublications,
@@ -317,6 +319,12 @@ const Navbar = () => {
           {lensProfileId !== "" ? (
             <Stack alignItems="center" spacing={2} direction="row">
               <Typography variant="h5">840 Blockos</Typography>
+              <IconButton>
+                <AccountCircleIcon
+                  sx={{ color: "white", width: 30, height: 30 }}
+                />
+              </IconButton>
+
               <Button
                 color="success"
                 variant="contained"
