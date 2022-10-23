@@ -25,9 +25,9 @@ import { Link as RouterLink } from "react-router-dom";
 
 const ProjectDetails = () => {
   const data = {
-    title: " Example Open Source Project",
+    title: "OpenLoops",
     description:
-      "This is an example open source project. Contribute to issues and gain Blockos!",
+      "OpenLoops is an open-source music editing software that is maintained by developers all across the world! ",
     issues: [
       {
         title: "Issue #492 - Create dashboard display for data",
