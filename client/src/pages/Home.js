@@ -7,14 +7,13 @@ import ProjectCardContainer from "../components/ProjectCardContainer";
 const Home = () => {
   return (
     <Box>
-      <Navbar />
       <Container maxWidth="md">
         <Box sx={{ mt: 5, textAlign: "center" }}>
           <Typography variant="h2" gutterBottom>
             Welcome to BlockHub.
           </Typography>
           <Typography variant="h6" color="text.secondary">
-            Curate projects and evaluate your contributions here at BlockBox.
+            Curate projects and evaluate your contributions here at BlockHub.
           </Typography>
         </Box>
         <ProjectCardContainer />
