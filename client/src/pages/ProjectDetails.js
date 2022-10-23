@@ -37,6 +37,18 @@ const ProjectDetails = () => {
           "Currently the submit button within the creation form is too close to the above text. Correct the butotn's margin/spacing to fix this issue.",
         severity: "Micro",
       },
+      {
+        title: "Issue #399 - Implement hide button",
+        details:
+          "Currently the submit button within the creation form is too close to the above text. Correct the butotn's margin/spacing to fix this issue.",
+        severity: "Minor",
+      },
+      {
+        title: "Issue #402 - Add progress bar for uploads",
+        details:
+          "Currently the submit button within the creation form is too close to the above text. Correct the butotn's margin/spacing to fix this issue.",
+        severity: "Minor",
+      },
     ],
   };
 
