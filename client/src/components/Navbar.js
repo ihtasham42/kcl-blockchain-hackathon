@@ -17,6 +17,7 @@ import { generateChallenge, authenticate } from "./utils/LensProtocol/login";
 import { createProfile, getProfile } from "./utils/LensProtocol/profile";
 import { uploadToIPFS } from "./utils/ipfs";
 import { v4 as uuidv4 } from "uuid";
+import { Link as RouterLink } from "react-router-dom";
 import {
   createPostTypedData,
   explorePublications,
@@ -288,6 +289,12 @@ const Navbar = () => {
           <Typography variant="h4">BlockHub</Typography>
         </Box>
         <Stack direction="row" spacing={3}>
+          <Button color="inherit" component={RouterLink} to="/leaderboard">
+            Leaderboard
+          </Button>
+          <Button color="inherit" component={RouterLink} to="/">
+            Curate
+          </Button>
           {currAcc == "" ? (
             <Button
               onClick={connectWallet}
@@ -308,13 +315,16 @@ const Navbar = () => {
             </Button>
           ) : null}
           {lensProfileId !== "" ? (
-            <Button
-              color="success"
-              variant="contained"
-              onClick={() => setOpen(true)}
-            >
-              Add Project
-            </Button>
+            <Stack alignItems="center" spacing={2} direction="row">
+              <Typography variant="h5">840 Blockos</Typography>
+              <Button
+                color="success"
+                variant="contained"
+                onClick={() => setOpen(true)}
+              >
+                Add Project
+              </Button>
+            </Stack>
           ) : null}
         </Stack>
       </Toolbar>

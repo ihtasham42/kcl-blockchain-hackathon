@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
 import ProjectDetails from "./pages/ProjectDetails";
+import Leaderboard from "./pages/Leaderboard";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="login" element={<LogIn />} />
         <Route path="projects" element={<ProjectDetails />} />
+        <Route path="leaderboard" element={<Leaderboard />} />
       </Routes>
     </Box>
   );
