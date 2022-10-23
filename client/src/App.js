@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
 import ProjectDetails from "./pages/ProjectDetails";
 import Leaderboard from "./pages/Leaderboard";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="login" element={<LogIn />} />
         <Route path="projects" element={<ProjectDetails />} />
         <Route path="leaderboard" element={<Leaderboard />} />
+        <Route path="profile" element={<Profile />} />
       </Routes>
     </Box>
   );

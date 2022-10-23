@@ -221,6 +221,7 @@ const Navbar = () => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
+    boxShadow: 10,
   };
 
   const [loading, setLoading] = useState(false);
@@ -319,7 +320,7 @@ const Navbar = () => {
           {lensProfileId !== "" ? (
             <Stack alignItems="center" spacing={2} direction="row">
               <Typography variant="h5">840 Blockos</Typography>
-              <IconButton>
+              <IconButton component={RouterLink}>
                 <AccountCircleIcon
                   sx={{ color: "white", width: 30, height: 30 }}
                 />
