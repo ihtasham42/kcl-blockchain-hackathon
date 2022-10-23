@@ -27,8 +27,11 @@ import {
 import { signedTypeData, splitSignature } from "./utils/LensProtocol/utils";
 import { getLensHub } from "./utils/LensProtocol/lens-hub";
 import { pollUntilIndexed } from "./utils/LensProtocol/transactions";
-const source = "blockerino";
+const source = "blockerino1";
 const Navbar = () => {
+  const [connectModal, setConnectModal] = useState(false);
+  const [lensHandle, setLensHandle] = useState("");
+
   const getPublications = async () => {
     const request = {
       sortCriteria: "LATEST",
@@ -54,7 +57,7 @@ const Navbar = () => {
       attributes: [],
       tags: [],
       media: [],
-      appId: "blockerino",
+      appId: "blockerino1",
     });
     console.log(ipfsResult);
     const payload = {
@@ -221,7 +224,6 @@ const Navbar = () => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
-    boxShadow: 10,
   };
 
   const [loading, setLoading] = useState(false);
@@ -234,6 +236,29 @@ const Navbar = () => {
 
   return (
     <AppBar position="static">
+      <Modal open={connectModal} sx={style}>
+        <Card sx={{ padding: 5 }}>
+          <Stack spacing={2}>
+            <TextField
+              fullWidth
+              placeholder="Enter your New Lens Handle"
+              onChange={(e) => {
+                setLensHandle(e.target.value);
+              }}
+            />
+            <Button
+              fullWidth
+              variant="contained"
+              onClick={async () => {
+                await createLensProfile(lensHandle);
+                setConnectModal(false);
+              }}
+            >
+              Submit
+            </Button>
+          </Stack>
+        </Card>
+      </Modal>
       <Modal open={open} sx={style}>
         <Card sx={{ padding: 5 }}>
           <Stack spacing={3}>
@@ -310,7 +335,7 @@ const Navbar = () => {
           ) : null}
           {currAcc !== "" && lensProfileId == "" ? (
             <Button
-              onClick={() => createLensProfile("kcl-easya")}
+              onClick={() => setConnectModal(true)}
               color="success"
               variant="contained"
             >
