@@ -10,7 +10,7 @@ import { Stack } from "@mui/system";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-const ProjectCard = ({ data, i, handle }) => {
+const ProjectCard = ({ data, i, handle, votes }) => {
   return (
     <Card variant="outlined" sx={{ m: 2 }}>
       <CardMedia
@@ -35,7 +35,7 @@ const ProjectCard = ({ data, i, handle }) => {
           alignItems="center"
         >
           <Chip
-            label="84 votes"
+            label={votes + " votes"}
             color="success"
             sx={{ width: 115, fontSize: 20 }}
           />
